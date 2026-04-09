@@ -3,7 +3,7 @@ use clap::{Arg, ArgAction, ArgMatches, Command};
 
 pub struct SubCmdRemove;
 
-const KEY_PID: &'static str = "PID";
+const KEY_PID: &str = "PID";
 
 impl Cmd for SubCmdRemove {
     const NAME: &'static str = "remove";
@@ -43,7 +43,7 @@ impl Cmd for SubCmdRemove {
             .process
             .iter()
             .filter(|p| &p.pid != pid)
-            .map(|p| p.clone())
+            .cloned()
             .collect();
 
         let count_filtered = processes.len();

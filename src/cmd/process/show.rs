@@ -3,7 +3,7 @@ use clap::{Arg, ArgAction, ArgMatches, Command};
 
 pub struct SubCmdShow;
 
-const KEY_PID: &'static str = "PID";
+const KEY_PID: &str = "PID";
 
 impl Cmd for SubCmdShow {
     const NAME: &'static str = "show";

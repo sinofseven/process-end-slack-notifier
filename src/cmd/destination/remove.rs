@@ -2,7 +2,7 @@ use crate::base::cmd::Cmd;
 use clap::{Arg, ArgAction, ArgMatches, Command};
 
 pub struct SubCmdRemove;
-const KEY_NAME: &'static str = "NAME";
+const KEY_NAME: &str = "NAME";
 
 impl Cmd for SubCmdRemove {
     const NAME: &'static str = "remove";
@@ -36,10 +36,10 @@ impl Cmd for SubCmdRemove {
         let mut configure = crate::models::configure::Configure::load()?;
         let all_processes = crate::models::processes::AllProcesses::load()?;
 
-        if let Some(_) = all_processes
+        if all_processes
             .process
             .iter()
-            .find(|p| p.destination.eq(name))
+            .any(|p| p.destination.eq(name))
         {
             return Err(format!(
                 "The destination is currently in use. (name: {name})"
@@ -52,7 +52,7 @@ impl Cmd for SubCmdRemove {
             .destination
             .iter()
             .filter(|&d| d.name.ne(name))
-            .map(|d| d.clone())
+            .cloned()
             .collect();
 
         let count_filtered = destinations.len();

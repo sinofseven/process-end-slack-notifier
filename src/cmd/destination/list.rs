@@ -10,7 +10,7 @@ impl Cmd for SubCmdList {
         Command::new(Self::NAME).about("list destination")
     }
 
-    fn run(args: &ArgMatches) -> Result<(), String> {
+    fn run(_args: &ArgMatches) -> Result<(), String> {
         let configure = crate::models::configure::Configure::load()?;
         for destination in configure.destination {
             println!("{}", destination.name);

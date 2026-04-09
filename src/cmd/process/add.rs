@@ -3,9 +3,9 @@ use clap::{Arg, ArgAction, ArgMatches, Command};
 
 pub struct SubCmdAdd;
 
-const KEY_PID: &'static str = "PID";
-const KEY_DESTINATION: &'static str = "DESTINATION";
-const KEY_MEMO: &'static str = "MEMO";
+const KEY_PID: &str = "PID";
+const KEY_DESTINATION: &str = "DESTINATION";
+const KEY_MEMO: &str = "MEMO";
 
 impl Cmd for SubCmdAdd {
     const NAME: &'static str = "add";
@@ -53,7 +53,7 @@ impl Cmd for SubCmdAdd {
         let memo: Option<&String> = args.get_one(KEY_MEMO);
 
         let mut all_processes = crate::models::processes::AllProcesses::load()?;
-        if let Some(_) = all_processes.get_process_info(pid) {
+        if all_processes.get_process_info(pid).is_some() {
             return Err(format!(
                 "There is a monitored process with the same pid. (pid: {})",
                 pid
@@ -61,7 +61,7 @@ impl Cmd for SubCmdAdd {
         }
 
         let configure = crate::models::configure::Configure::load()?;
-        if let None = configure.resolve_destination(destination) {
+        if configure.resolve_destination(destination).is_none() {
             return Err(format!("Destination not found (name: {destination})"));
         }
 

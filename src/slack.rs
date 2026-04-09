@@ -11,7 +11,7 @@ struct Payload {
 
 const OFFSET_JST: FixedOffset = FixedOffset::east_opt(9 * 3600).unwrap();
 
-pub fn send_slack(url: &String, process: &crate::models::processes::Process) -> Result<(), String> {
+pub fn send_slack(url: &str, process: &crate::models::processes::Process) -> Result<(), String> {
     let payload = build_blocks(process);
     ureq::post(url)
         .send_json(&payload)

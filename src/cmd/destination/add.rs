@@ -3,9 +3,9 @@ use clap::{Arg, ArgAction, ArgMatches, Command};
 
 pub struct SubCmdAdd;
 
-const KEY_NAME: &'static str = "NAME";
-const KEY_URL: &'static str = "URL";
-const KEY_MEMO: &'static str = "MEMO";
+const KEY_NAME: &str = "NAME";
+const KEY_URL: &str = "URL";
+const KEY_MEMO: &str = "MEMO";
 
 impl Cmd for SubCmdAdd {
     const NAME: &'static str = "add";
@@ -53,7 +53,7 @@ impl Cmd for SubCmdAdd {
 
         let mut configure = crate::models::configure::Configure::load()?;
 
-        if let Some(_) = configure.resolve_destination(name) {
+        if configure.resolve_destination(name).is_some() {
             return Err(format!(
                 "There is a destination with the same name. (name: {name})"
             ));

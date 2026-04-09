@@ -2,7 +2,7 @@ use crate::base::cmd::Cmd;
 use clap::{Arg, ArgAction, ArgMatches, Command};
 
 pub struct SubCmdShow;
-const KEY_NAME: &'static str = "NAME";
+const KEY_NAME: &str = "NAME";
 
 impl Cmd for SubCmdShow {
     const NAME: &'static str = "show";
