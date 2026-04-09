@@ -48,8 +48,7 @@ impl Configure {
         }
         let content =
             toml::to_string(self).map_err(|e| format!("failed to serialize config: {e}"))?;
-        std::fs::write(&path, content)
-            .map_err(|e| format!("failed to write config file: {e}"))?;
+        std::fs::write(&path, content).map_err(|e| format!("failed to write config file: {e}"))?;
         Ok(())
     }
 }

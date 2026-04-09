@@ -8,8 +8,8 @@ pub struct ProcessInfo {
 }
 
 pub fn resolve_process(pid: u32) -> Result<ProcessInfo, String> {
-    let raw = fs::read(format!("/proc/{pid}/cmdline"))
-        .map_err(|e| format!("fs::read failed: {e}"))?;
+    let raw =
+        fs::read(format!("/proc/{pid}/cmdline")).map_err(|e| format!("fs::read failed: {e}"))?;
     if raw.is_empty() {
         return Err("resolve_process failed: empty cmdline (kernel thread or zombie)".to_string());
     }
@@ -30,7 +30,7 @@ pub fn resolve_process(pid: u32) -> Result<ProcessInfo, String> {
     Ok(ProcessInfo { command, cwd })
 }
 
-pub fn find_processes(pids: &[u32]) -> Vec<u32> {
+pub fn find_terminated_pids(pids: &[u32]) -> Vec<u32> {
     pids.iter()
         .copied()
         .filter(|&pid| !Path::new(&format!("/proc/{pid}")).exists())
