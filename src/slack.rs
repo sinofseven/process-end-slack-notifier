@@ -43,7 +43,7 @@ fn build_blocks(process: &crate::models::processes::Process) -> Payload {
     ];
 
     if let Some(memo) = &process.memo {
-        blocks.push(generate_section_block(format!("*Memo*: `{}`", process.cwd)))
+        blocks.push(generate_section_block(format!("*Memo*: `{}`", memo)));
     }
 
     Payload { blocks }
