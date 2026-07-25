@@ -15,7 +15,7 @@ jobs:
     env:
       TARGET: x86_64-unknown-linux-musl
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - uses: dtolnay/rust-toolchain@stable
         with:
           target: ${{ env.TARGET }}
@@ -42,7 +42,7 @@ jobs:
     env:
       TARGET: aarch64-unknown-linux-musl
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - uses: dtolnay/rust-toolchain@stable
         with:
           target: ${{ env.TARGET }}
@@ -67,7 +67,7 @@ jobs:
   third-party-licenses:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
       - run: cargo install cargo-about --features="cli"
@@ -88,7 +88,7 @@ jobs:
       - third-party-licenses
     if: ${{ github.ref_type == 'tag' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - uses: actions/download-artifact@v7
         with:
           pattern: tmp-*
