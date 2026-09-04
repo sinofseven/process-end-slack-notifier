@@ -104,7 +104,7 @@ jobs:
       - run: ls . | xargs -I {} zip -r "{}.zip" "{}"
         working-directory: package
       - run: find package -type f | sort
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3
         with:
           draft: true
           generate_release_notes: true
